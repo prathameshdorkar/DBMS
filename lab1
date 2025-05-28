@@ -1,0 +1,26 @@
+create database company;
+use company;
+
+create table employee(empno int primary key, ename varchar(255), job varchar(255), manager_no int, sal decimal(10,2), commission decimal(10,2));
+
+create user 'krishna'@'localhost' identifyed by 'password';
+grant all privilages your_database_name.*to 'krishna'@'localhost';
+
+flush privilages;
+
+insert into employee values(101,'krishna','manager',null,75000,null);
+insert into employee values(102,'bob','analyst',101,70000,4000);
+insert into employee values(103,'omkar','cleark',101,75000,null);
+
+select * from employee;
+rollback;
+select * from employee;
+
+alter the table employee
+modify empno int primary key;
+
+alter the table employee
+modify ename varchar(50) not null;
+
+insert into employee(empno, ename, job, manager_no, sal, commission)
+values(104,'david','salsmen',null,null,null);
