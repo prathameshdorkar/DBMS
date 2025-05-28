@@ -1,0 +1,27 @@
+create database employee;
+use employee;
+
+create table employee(E_ID int primary key, E_NAME varchar(50), AGE int, SALARY decimal(10,2));
+
+inset into employee(E_ID, E_NAME, AGE, SALARY)
+values(1,'krishna',20,75000.00),
+      (2,'manju',24,70000.00),
+      (3,'zeeshan',27,60000.00),
+      (4,'nikhil',30,55000.00);
+
+SELECT COUNT(E_NAME) as num_employee
+FROM employee;
+
+SELECT MAX(AGE) as AGE_MAX
+FROM employee;
+
+SELECT MIN(AGE) as AGE_MIN
+FROM employee;
+
+SELECT E_NAME,salary
+FROM employee
+Orderd by ASC;
+
+SELECT Salary, COUNT(*) as num_employee
+FROM employee
+Group by salary;
