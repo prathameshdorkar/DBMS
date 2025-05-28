@@ -1,0 +1,24 @@
+create database company;
+use company;
+
+create table employee ( empno int, ename varchar(50), job varchar(50), MGR int, sal decimal(10,2));
+
+alter table employee
+add column commission decimal(10,2);
+
+insert into employee(empno, ename, job, MGR, sal, commission)
+valuse(101,'krishna','manager',null,100000.00,null),
+      (102,'tarun','developer',101,75000.00,null),
+      (103,'omkar','designer',101,70000.00,null),
+      (104,'vikram','analyst',101,60000.00,null),
+      (105,'Aakash','accountent',null,55000.00,null);
+
+UPDATE INTO employee
+SET job ='senior salsemen'
+WHERE empno = 104;
+
+alter table employee
+RENAME COLUMN emane as emp_name;
+
+DELETE FROME employee
+WHERE empno = 105;
