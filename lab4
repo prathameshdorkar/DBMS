@@ -1,0 +1,45 @@
+create database dbms;
+use dbms;
+
+create table customers(id int, NAME varchar(255), AGE int, ADDRESS varchar(255), Salary decimal(10,2));
+
+insert into customers(NAME, AGE, ADDRESS, Salary)
+values('krishna','1193 Ramthirth Nagar Belagavi,karnataka',75000.00),
+      ('zeeshan','1134 Ashok nagar Belagavi,Karnataka',50000.00),
+      ('prajwal','1523 Mahantesh Nagar Belagavi,karnataka',55000.00),
+      ('manoj','1745 Shree Nagar Belagavi,karnataka',45000.00),
+      ('rohit','1864 Hanuman Nagar Belagavi,karnataka',35000.00);
+
+select * from customers;
+
+DELIMITER $$
+CREATE TRIGGER display_salary_changes_insert
+BEFOR INSETR ON customers
+FOR EACH ROW
+BIGIN
+    INSERT INTO salary_changes_log(customer_id, old_salary, new_salary, change_time)
+    VALUES(new.id, null, new.salary, now());
+END$$
+DELIMITER;
+
+DELIMITER $$
+CREATE TRIGGER display_salary_changes_update
+BEFOR UPDATE ON customers
+FOR EACH ROW
+BIGIN
+    UPDATE INTO salary_changes_log(customer_id, old_salary, new_salary, change_time)
+    VALUES(new.id, old_salary, new_salary,now());
+END$$
+DELIMITER;
+
+DELIMITER $$
+CREATE TRIGGER display-salary_changes_delete
+BEFOR DELETE ON customers
+FOR EACH ROW
+BIGIN
+    DELETE INTO salary_changes_log(customer_id, old_salary, new_salary, change_time)
+    VALUES(old.id, old.salary, null, now());
+END$$
+DELIMITER;
+
+SHOW TRIGGERS;
